@@ -1,12 +1,18 @@
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { useTheme } from "@mui/material/styles";
 
-import './App.css'
 
 function App() {
-
-  return (
-    <div className="App">
-    </div>
-  )
+const theme = useTheme();
+  return
+  <>
+  <div style={{ backgroundColor: theme.palette.primary.main}}>Hello World
+  </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <h1>Heee</h1>
+    </ThemeProvider>
+  </>
 }
 
 export default App
