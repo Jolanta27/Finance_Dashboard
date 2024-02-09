@@ -1,5 +1,5 @@
 import { useGetKpisQuery } from '@/state/api';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import DashboardBox from '@/components/DashboardBox';
 import FlexBetween from '@/components/FlexBetween';
 import { useTheme } from '@mui/material';
@@ -8,12 +8,20 @@ import { CartesianGrid, Label, Legend, Line, LineChart, ResponsiveContainer, XAx
 import regression, { DataPoint } from 'regression';
 
 const Predictions = () => {
+  console.log('Rendering Predictions component')
     const { palette } = useTheme();
     const [isPredictions, setIsPredictions] = useState(false);
     const { data: kpiData } = useGetKpisQuery();
 
+    useEffect(() => {
+      console.log(isPredictions);
+    }, [isPredictions]);
+
     const formattedData = useMemo(() => {
-        if(!kpiData) return [];
+        if (!kpiData || !kpiData[0] || !kpiData[0].monthlyData) {
+        return [];
+        }
+        
         const monthData = kpiData[0].monthlyData;
 
         const formatted: Array<DataPoint> = monthData.map((item, i) => {
@@ -23,6 +31,7 @@ const Predictions = () => {
     );
     const regressionLine = regression.linear(formatted);
 
+        console.log(formattedData);
     return monthData.map(({ month, revenue}, i: number) => {
         return {
             name: month,
@@ -45,7 +54,10 @@ const Predictions = () => {
             </Typography>
         </Box>
         <Button 
-        onClick={() => setIsPredictions(!isPredictions)}
+        onClick={() => {
+          setIsPredictions(!isPredictions)
+          console.log(isPredictions);
+       }}
             sx={{
                 color: palette.grey[900],
                 backgroundColor: palette.grey[700],
@@ -99,6 +111,7 @@ const Predictions = () => {
               dot={false}
             />
             {isPredictions && (
+              console.log('Rendering predicted revenue line'),
                  <Line
                  type="monotone"
                  dataKey="Predicted Revenue"

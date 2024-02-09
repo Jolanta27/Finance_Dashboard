@@ -31,4 +31,4 @@ const theme = useMemo(() => createTheme(themeSettings), []);
   )
 }
 
-export default App
+export default App;
