@@ -1,6 +1,6 @@
-import React from 'react'
-import FlexBetween from './FlexBetween'
-import { useTheme } from '@emotion/react'
+import React from 'react';
+import FlexBetween from './FlexBetween';
+import { useTheme } from '@emotion/react';
 import { Typography } from '@mui/material';
 import { Box }from '@mui/material';
 

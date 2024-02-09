@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
 import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from '@/state/api';
 import FlexBetween from '@/components/FlexBetween';
-import { Pie, PieChart } from 'recharts';
+import { Cell, Pie, PieChart } from 'recharts';
 
 
 const Row3 = () => {
@@ -166,7 +166,7 @@ const Row3 = () => {
             paddingAngle={2}
             dataKey="value"
           >
-            {pieData.map((entry, index) => (
+            {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={pieColors[index]} />
             ))}
           </Pie>
@@ -200,4 +200,4 @@ const Row3 = () => {
   )
 }
 
-export default Row3
+export default Row3;
