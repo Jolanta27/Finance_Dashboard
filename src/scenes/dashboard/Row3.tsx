@@ -19,7 +19,7 @@ const Row3 = () => {
   const pieChartData = useMemo(() => {
     if (kpiData && kpiData[0]) {
       const totalExpenses = kpiData[0]?.totalExpenses;
-      return Object.entries(kpiData[0].expensesByCategory).map(([key, value]) => 
+      const data =  Object.entries(kpiData[0].expensesByCategory).map(([key, value]) => 
          [
           {
             name: key,
@@ -31,6 +31,8 @@ const Row3 = () => {
           },
         ]
       );
+      console.log(data);
+      return data;
     }
     return [];
   }, [kpiData]);
@@ -159,6 +161,7 @@ const Row3 = () => {
           width={110}
           height={100}
         >
+          {data && (
           <Pie
             stroke="none"
             data={data}
@@ -171,6 +174,7 @@ const Row3 = () => {
               <Cell key={`cell-${index}`} fill={pieColors[index]} />
             ))}
           </Pie>
+          )}
         </PieChart>
         <Typography variant="h5">{data[0].name}</Typography>
     </Box>
