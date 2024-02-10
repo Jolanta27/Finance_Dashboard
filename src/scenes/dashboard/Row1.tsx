@@ -24,41 +24,41 @@ const Row1 = () => {
   const { data } = useGetKpisQuery();
 
   const revenue = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue }) => {
+    if (data && data[0]?.monthlyData) {
+      return data[0]?.monthlyData.map(({ month, revenue }) => {
         return {
           name: month.substring(0, 3),
           revenue: revenue,
         };
-      })
-    );
+      });
+    }
+    return [];  
   }, [data]);
 
   const revenueExpenses = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+    if (data && data[0]?.monthlyData) {
+      return data[0]?.monthlyData.map(({ month, revenue, expenses }) => {
         return {
           name: month.substring(0, 3),
           revenue: revenue,
           expenses: expenses,
         };
-      })
-    );
+      });
+    }
+    return [];
   }, [data]);
 
   const revenueProfit = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+    if (data && data[0]?.monthlyData) {
+    return data[0]?.monthlyData.map(({ month, revenue, expenses }) => {
         return {
           name: month.substring(0, 3),
           revenue: revenue,
           profit: (revenue - expenses).toFixed(2),
         };
-      })
-    );
+      });
+    } 
+    return [];
   }, [data]);
 
   return (

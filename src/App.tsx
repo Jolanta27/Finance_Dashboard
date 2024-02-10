@@ -19,7 +19,6 @@ const theme = useMemo(() => createTheme(themeSettings), []);
           <Navbar />
     <Routes>
       <Route path="/" element={<Dashboard/>}/>
-      <Route path="/predictions" element={<div>prediction page</div>}/>
       <Route path="/predictions" 
       element={<Predictions />}
       />

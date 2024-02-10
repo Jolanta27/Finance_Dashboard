@@ -32,9 +32,8 @@ const Row2 = () => {
   const { data: productData } = useGetProductsQuery();
 
   const operationalExpenses = useMemo(() => {
-    return (
-      operationalData &&
-      operationalData[0].monthlyData.map(
+    if (operationalData && operationalData[0]?.monthlyData) {
+      return operationalData && operationalData[0]?.monthlyData.map(
         ({ month, operationalExpenses, nonOperationalExpenses }) => {
           return {
             name: month.substring(0, 3),
@@ -42,21 +41,22 @@ const Row2 = () => {
             "Non Operational Expenses": nonOperationalExpenses,
           };
         }
-      )
-    );
+      );
+      } 
+      return [];
   }, [operationalData]);
 
   const productExpenseData = useMemo(() => {
-    return (
-      productData &&
-      productData.map(({ _id, price, expense }) => {
+    if (productData) {
+      return productData.map(({ _id, price, expense }) => {
         return {
           id: _id,
           price: price,
           expense: expense,
         };
-      })
-    );
+      });
+    }
+    return [];
   }, [productData]);
 
   return (

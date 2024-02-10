@@ -29,4 +29,4 @@ const BoxHeader = ({ icon, title, subtitle, sideText }: Props) => {
   )
 }
 
-export default BoxHeader
+export default BoxHeader;
